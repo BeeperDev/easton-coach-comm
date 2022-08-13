@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const StudentCommentSchema = new mongoose.Schema({
+const CoachCommentSchema = new mongoose.Schema({
   comment: {
     type: String,
     required: true,
@@ -9,10 +9,10 @@ const StudentCommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // this comment is for which student**
-  student: {
+  // this comment is for which coach**
+  coach: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Student",
+    ref: "Coach",
   },
   createdBy: {
     //user name of coach. set when comment is created
@@ -29,4 +29,4 @@ const StudentCommentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("StudentComment", StudentCommentSchema);
+module.exports = mongoose.model("CoachComment", CoachCommentSchema);

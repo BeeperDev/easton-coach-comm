@@ -19,6 +19,10 @@ const CoachSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  discipline: {
+    type: String,
+    require: true,
+  },
 });
 
 // Password hash middleware.
