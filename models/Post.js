@@ -1,19 +1,7 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  caption: {
+  comment: {
     type: String,
     required: true,
   },
@@ -21,13 +9,17 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  user: {
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Coach",
   },
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  createdById: {
+    type: mongoose.Schema.Types.ObjectId, //get the object id of....
+    ref: "Coach", // user
   },
 });
 

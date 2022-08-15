@@ -1,32 +1,30 @@
 const mongoose = require("mongoose");
 
 const StudentSchema = new mongoose.Schema({
-  comment: {
+  studentName: {
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
+  studentSport: {
+    type: String,
     required: true,
   },
-  // for what student**
-  student: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
-  },
-  createdBy: {
-    //user name of user. set when comment is created
+  studentRank: {
     type: String,
-    ref: "User",
+    required: true,
   },
-  createdById: {
-    type: mongoose.Schema.Types.ObjectId, //get the object id of....
-    ref: "User", // user
+  promote: {
+    type: Boolean,
+    default: false,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
   },
 });
 
-module.exports = mongoose.model("Comment", CommentSchema);
+module.exports = mongoose.model("Student", StudentSchema);

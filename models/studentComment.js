@@ -9,19 +9,19 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // for what student**
+  // this comment is for which student**
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
+    ref: "Student",
   },
   createdBy: {
-    //user name of user. set when comment is created
+    //user name of coach. set when comment is created
     type: String,
-    ref: "User",
+    ref: "Coach",
   },
   createdById: {
     type: mongoose.Schema.Types.ObjectId, //get the object id of....
-    ref: "User", // user
+    ref: "Coach", // user
   },
   createdAt: {
     type: Date,
