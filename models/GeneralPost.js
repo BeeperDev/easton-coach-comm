@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
+const GeneralPostSchema = new mongoose.Schema({
   comment: {
     type: String,
     required: true,
@@ -25,4 +25,4 @@ const PostSchema = new mongoose.Schema({
 
 // MongoDB collection names here - will give lowercase plural of name
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("GeneralPost", GeneralPostSchema);
