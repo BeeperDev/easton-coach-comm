@@ -11,7 +11,6 @@ module.exports = {
       console.log(err);
     }
   },
-
   getFeed: async (req, res) => {
     try {
       const posts = await GeneralPost.find().sort({ createdAt: "desc" }).lean();
