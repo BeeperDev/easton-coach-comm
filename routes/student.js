@@ -4,6 +4,7 @@ const upload = require("../middleware/multer");
 const studentController = require("../controllers/student");
 
 router.get("/", studentController.getStudents);
+// router.get("/:id", studentController.getStudentProfile);
 router.post("/addStudent", studentController.addStudent);
 
 module.exports = router;

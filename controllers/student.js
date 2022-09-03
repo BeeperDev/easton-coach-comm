@@ -2,9 +2,17 @@ const cloudinary = require("../middleware/cloudinary");
 const Student = require("../models/Student");
 
 module.exports = {
-  getStudents: (req, res) => {
-    res.render("student.ejs");
+  getStudents: async (req, res) => {
+    try {
+      const students = await Student.find()
+        .sort({ studentName: "desc" })
+        .lean();
+      res.render("student.ejs", { students: students });
+    } catch (err) {
+      console.log(err);
+    }
   },
+  getStudentProfile: {},
   addStudent: async (req, res) => {
     try {
       await Student.create({

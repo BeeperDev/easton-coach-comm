@@ -1,7 +1,20 @@
 <%- include('partials/headerInside') -%>
 <main class="container">
-  <div class="row justify-content-center">
+  <div class="row justify-content-between">
     <section class="col-6 mt-5">
+      <h2 class="pb-4">Current Students</h2>
+      <ul class="list-unstyled">
+        <% for(let i=0; i< students.length; i++) { %>
+        <li>
+          <a href="/student/<%= students[i]._id %>">
+            <span> <%= students[i].studentName %></span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </section>
+    <section class="col-6 mt-5">
+      <h2 class="pb-4">Add a student</h2>
       <form action="/student/addStudent" method="POST">
         <div class="mb-3">
           <label for="studentName" class="form-label">Student Name</label>
