@@ -7,7 +7,10 @@ module.exports = {
       const students = await Student.find()
         .sort({ studentName: "desc" })
         .lean();
-      res.render("student.ejs", { students: students });
+      res.render("student.ejs", {
+        students: students,
+        user: req.user,
+      });
     } catch (err) {
       console.log(err);
     }
