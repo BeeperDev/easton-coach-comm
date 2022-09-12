@@ -5,7 +5,7 @@ const coachController = require("../controllers/coach");
 const { ensureAuth } = require("../middleware/auth");
 
 router.get("/", coachController.getCoaches);
-router.get("/:id", ensureAuth, coachController.getProfile);
+router.get("/:id", coachController.getProfile);
 router.post("/addComment/:id", coachController.addComment);
 
 module.exports = router;

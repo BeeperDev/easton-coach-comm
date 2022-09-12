@@ -5,13 +5,29 @@ const Coach = require("../models/Coach");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const comments = await CoachComment.find({ coach: req.params.id }) // find comments for the coach's page youre on
-        .sort({ createdAt: "desc" })
-        .lean();
-      res.render("coachProfile.ejs", {
-        user: req.user,
-        comments: comments,
-      });
+      if (req.user.id === req.params.id) {
+        console.log("option1");
+        //if logged in user is same id as query param, display user profile
+        const comments = await CoachComment.find({ coach: req.params.id }) // find comments for the coach's page youre on
+          .sort({ createdAt: "desc" })
+          .lean();
+        res.render("coachProfile.ejs", {
+          activeUser: req.user,
+          user: req.user,
+          comments: comments,
+        });
+      } else {
+        // user wants to see another coach's profile
+        const coach = await Coach.findById(req.params.id);
+        const comments = await CoachComment.find({ coach: req.params.id }) // find comments for the coach's page youre on
+          .sort({ createdAt: "desc" })
+          .lean();
+        res.render("coachProfile.ejs", {
+          activeUser: req.user,
+          user: coach,
+          comments: comments,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -20,6 +36,7 @@ module.exports = {
     try {
       const coaches = await Coach.find().sort({ coachName: "desc" }).lean();
       res.render("coach.ejs", {
+        activeUser: req.user,
         coaches: coaches,
         user: req.user,
       });
