@@ -23,55 +23,52 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-        <a class="navbar-brand" href="/general">
-          <img
-            src="/imgs/logo.png"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt=""
-          />
-          <span class="px-3">Easton Coach Communication</span>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/coach/<%= activeUser._id %>"
-                >My Profile <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/coach">Coaches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student">Students</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Student Name"
-              aria-label="Search"
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/general">
+            <img
+              src="/imgs/logo.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt=""
             />
-          </form>
+            <span class="px-3">Easton Coach Communication</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-between"
+            id="navbarSupportedContent"
+          >
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/coach/<%= activeUser._id %>"
+                  >My Profile</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/coach">Coaches</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student">Students</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
