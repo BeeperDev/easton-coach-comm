@@ -1,1 +1,58 @@
-<%- include('partials/header') -%> <%- include('partials/footer') -%>
+<%- include('partials/headerInside') -%> 
+<div class="container-sm">
+    <div class="row mt-5">
+        <div class="d-flex">
+            <div class="card" style="width: 18rem;">
+                <img src="/imgs/profile.png" class="card-img-top" alt="stock profile">
+                <div class="card-body">
+                  <h5 class="card-title"><%= student.studentName %></h5>
+                </div>
+              </div>
+            <div>
+                <table class="table">
+                    <tr>
+                        <td>Student discipline: </td>
+                        <td><%= student.discipline %></td>
+                    </tr>
+                    <tr>
+                        <td>Student Rank:</td>
+                        <td><%= student.studentRank %></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form action="/student/addPhoto" enctype="multipart/form-data" method="POST">
+                                <label for="imageUpload" class="form-label">Image</label>
+                                <input type="file" class="form-control" id="imageUpload" name="file">
+                                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+            <div class="mt-5">
+              <h2>Leave a comment</h2>
+              <form action="/student/addComment/<%= student._id %> " method="POST">
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment">
+                </div>
+                <button type="submit" class="btn btn-danger">Submit</button>
+              </form>
+            </div>
+            <div>
+                <ul class="row list-unstyled">
+                    <% for(let i=0; i<comments.length; i++) { %>
+                      <li class="justify-content-between mt-5">
+                        <!--Add user attribution-->
+                        <span>User <%= comments[i].createdBy %> says: "<%= comments[i].comment%>"                     
+                      </li>
+                    <% } %>
+                  </ul>
+            </div>
+        
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/footer') -%>

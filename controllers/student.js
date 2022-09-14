@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Student = require("../models/Student");
+const StudentComment = require("../models/StudentComment");
 
 module.exports = {
   getStudents: async (req, res) => {
@@ -8,6 +9,7 @@ module.exports = {
         .sort({ studentName: "desc" })
         .lean();
       res.render("student.ejs", {
+        activeUser: req.user,
         students: students,
         user: req.user,
       });
@@ -15,7 +17,21 @@ module.exports = {
       console.log(err);
     }
   },
-  getStudentProfile: {},
+  getStudentProfile: async (req, res) => {
+    try {
+      const student = await Student.findById(req.params.id);
+      const comments = await StudentComment.find({ student: req.params.id })
+        .sort({ createdAt: "desc" })
+        .lean();
+      res.render("studentProfile.ejs", {
+        activeUser: req.user,
+        student: student,
+        comments: comments,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   addStudent: async (req, res) => {
     try {
       await Student.create({
@@ -25,6 +41,21 @@ module.exports = {
       });
       console.log("student has been created");
       res.redirect("/student");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  addComment: async (req, res) => {
+    try {
+      await StudentComment.create({
+        comment: req.body.comment, // coming from the form
+        likes: 0,
+        student: req.params.id, // :id was passed in the route (url)
+        createdBy: req.user.coachName, //userName of the logged in coach that made comment
+        createdById: req.user.id, // req.user is passed in through passport when user in logged in
+      });
+      console.log("Comment has been added!");
+      res.redirect("/student/" + req.params.id); // redirect back to the specific post
     } catch (err) {
       console.log(err);
     }

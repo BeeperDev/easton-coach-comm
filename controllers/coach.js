@@ -6,7 +6,6 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       if (req.user.id === req.params.id) {
-        console.log("option1");
         //if logged in user is same id as query param, display user profile
         const comments = await CoachComment.find({ coach: req.params.id }) // find comments for the coach's page youre on
           .sort({ createdAt: "desc" })

@@ -9,7 +9,7 @@ const StudentCommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // this comment is for which student**
+  // this comment is for which student's page**
   student: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
