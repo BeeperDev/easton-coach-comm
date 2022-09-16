@@ -5,11 +5,9 @@ const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
 const { ensureAuth } = require("../middleware/auth");
 
-//Main Routes - simplified for now
+//Main Routes
 router.get("/", homeController.getIndex);
 router.get("/general", ensureAuth, postsController.getFeed);
-
-// router.get("/student", ensureAuth, studentController.getProfile);
 
 // routes for use login/signup
 router.get("/login", authController.getLogin);

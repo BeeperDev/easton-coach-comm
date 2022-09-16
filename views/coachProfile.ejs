@@ -1,15 +1,17 @@
 <%- include('partials/headerInside') -%> 
-<div class="container">
+<div class="container-sm">
     <div class="row mt-5">
-        <div class="col-6">
+        <div>
+
             <div>
                 <p><strong>Coach Name</strong>: <%= user.coachName %></p>
                 <p><strong>Email</strong>: <%= user.email %></p>
                 <a href="/logout" class="col-3 btn btn-primary">Logout</a>
             </div>
+            
             <div class="mt-5">
               <h2>Leave a comment</h2>
-              <form action="/coach/addComment/<%= user._id %> " method="POST">
+              <form action="/coach/addComment/<%= user._id %>" class='mb-4' method="POST">
                 <div class="mb-3">
                     <label for="comment" class="form-label">Comment</label>
                     <input type="text" class="form-control" id="comment" name="comment">
@@ -17,19 +19,24 @@
                 <button type="submit" class="btn btn-danger">Submit</button>
               </form>
             </div>
-            <div>
-                <ul class="row list-unstyled">
-                    <% for(let i=0; i<comments.length; i++) { %>
-                      <li class="justify-content-between mt-5">
-                        <!--Add user attribution-->
-                        <span>User <%= comments[i].createdBy %> says: "<%= comments[i].comment%>"                     
-                      </li>
-                    <% } %>
-                  </ul>
+            
+
+            <div class="list-group">
+                <% for(let i=0; i<comments.length; i++) { %>
+                <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%= comments[i].createdBy %>:</h5>
+                    <small> <%= (comments[i].createdAt).toDateString(); %> </small>
+                  </div>
+                  <p class="mb-1">"<%= comments[i].comment%>"</p>
+                  <small>And some small print.</small>
+                </a>
+                <% } %>
             </div>
+
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
 
 <%- include('partials/footer') -%>

@@ -1,38 +1,24 @@
 <%- include('partials/headerInside') -%> 
 <div class="container-sm">
     <div class="row mt-5">
-        <div class="d-flex">
-            <div class="card" style="width: 18rem;">
-                <img src="/imgs/profile.png" class="card-img-top" alt="stock profile">
-                <div class="card-body">
-                  <h5 class="card-title"><%= student.studentName %></h5>
+        <div>
+
+            <div class="d-flex">
+                <div class="col-6">
+                    <img src="/imgs/profile.png" class='img-thumbnail rounded w-50' alt="stock profile">
                 </div>
-              </div>
-            <div>
-                <table class="table">
-                    <tr>
-                        <td>Student discipline: </td>
-                        <td><%= student.discipline %></td>
-                    </tr>
-                    <tr>
-                        <td>Student Rank:</td>
-                        <td><%= student.studentRank %></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form action="/student/addPhoto" enctype="multipart/form-data" method="POST">
-                                <label for="imageUpload" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="imageUpload" name="file">
-                                <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+                <div class="col-6">
+                    <ul class="list-unstyled">
+                        <li><strong>Name: </strong><%= student.studentName %></li>
+                        <li><strong>Discipline: </strong><%= student.discipline %></li>
+                        <li><strong>Rank: </strong><%= student.studentRank %></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+            
             <div class="mt-5">
               <h2>Leave a comment</h2>
-              <form action="/student/addComment/<%= student._id %> " method="POST">
+              <form action="/student/addComment/<%= student._id %> " class='mb-4' method="POST">
                 <div class="mb-3">
                     <label for="comment" class="form-label">Comment</label>
                     <input type="text" class="form-control" id="comment" name="comment">
@@ -40,19 +26,24 @@
                 <button type="submit" class="btn btn-danger">Submit</button>
               </form>
             </div>
-            <div>
-                <ul class="row list-unstyled">
-                    <% for(let i=0; i<comments.length; i++) { %>
-                      <li class="justify-content-between mt-5">
-                        <!--Add user attribution-->
-                        <span>User <%= comments[i].createdBy %> says: "<%= comments[i].comment%>"                     
-                      </li>
-                    <% } %>
-                  </ul>
-            </div>
+            
         
-      </div>
+            <div class="list-group">
+                <% for(let i=0; i<comments.length; i++) { %>
+                <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%= comments[i].createdBy %>:</h5>
+                    <small> <%= (comments[i].createdAt).toDateString(); %> </small>
+                  </div>
+                  <p class="mb-1">"<%= comments[i].comment%>"</p>
+                  <small>And some small print.</small>
+                </a>
+                <% } %>
+            </div>
+
+        </div>
     </div>
-  </div>
+</div>
+
 
 <%- include('partials/footer') -%>
