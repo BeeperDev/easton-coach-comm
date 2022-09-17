@@ -60,4 +60,23 @@ module.exports = {
       console.log(err);
     }
   },
+  addPhoto: async (req, res) => {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      await Student.updateOne(
+        { _id: req.params.id },
+        {
+          $set: {
+            image: result.secure_url, // cloudinary response
+            cloudinaryId: result.public_id, // cloudinary respone
+          },
+        }
+      );
+      console.log("image added to student model");
+      res.redirect(`/student/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

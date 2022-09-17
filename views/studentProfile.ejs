@@ -5,8 +5,35 @@
 
             <div class="d-flex">
                 <div class="col-6">
-                    <img src="/imgs/profile.png" class='img-thumbnail rounded w-50' alt="stock profile">
-                </div>
+                    <% if(student.image){ %>
+                        <img src="<%= student.image %>" role="button" class='img-thumbnail rounded w-50' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
+                    <% } else { %>
+                        <img src="/imgs/profile.png" role="button" class='img-thumbnail rounded w-50' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
+                    <% } %>    
+                    </div>
+                
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Upload Student Photo</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/student/addPhoto/<%= student._id %>?_method=PUT" enctype="multipart/form-data" method="POST">
+                                <label for="imageUpload" class="form-label">Image</label>
+                                <input type="file" class="form-control" id="imageUpload" name="file"/>
+                                <button type="submit" class="btn btn-primary" value="Upload">Upload Photo</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 <div class="col-6">
                     <ul class="list-unstyled">
                         <li><strong>Name: </strong><%= student.studentName %></li>
@@ -15,13 +42,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="mt-5">
               <h2>Leave a comment</h2>
               <form action="/student/addComment/<%= student._id %> " class='mb-4' method="POST">
                 <div class="mb-3">
-                    <label for="comment" class="form-label">Comment</label>
-                    <input type="text" class="form-control" id="comment" name="comment">
+                    <input type="text" class="form-control" id="comment" placeholder="<%= activeUser.coachName %> says... " name="comment">
                 </div>
                 <button type="submit" class="btn btn-danger">Submit</button>
               </form>
