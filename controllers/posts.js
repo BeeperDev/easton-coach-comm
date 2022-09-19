@@ -7,13 +7,26 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await GeneralPost.find().sort({ createdAt: "desc" }).lean();
-      const coaches = await Coach.find({ user: req.user.id });
 
       res.render("generalPosts.ejs", {
-        generalPost: posts,
+        posts: posts,
         user: req.user,
         activeUser: req.user,
       });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  addComment: async (req, res) => {
+    try {
+      await GeneralPost.create({
+        comment: req.body.comment, // coming from the form
+        likes: 0,
+        createdBy: req.user.coachName, //userName of the logged in coach that made comment
+        createdById: req.user.id, // req.user is passed in through passport when user in logged in
+      });
+      console.log("Comment has been added!");
+      res.redirect("/general"); // redirect back to the specific post
     } catch (err) {
       console.log(err);
     }

@@ -10,7 +10,7 @@ const GeneralPostSchema = new mongoose.Schema({
     required: true,
   },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "Coach",
   },
   createdAt: {
