@@ -4,43 +4,58 @@
         <div>
 
             <div class="d-flex">
-                <div class="col-6">
+                
+
+                <div class="w-100 shadow p-3 mb-5 rounded-3">
+                    <div>
+                        <div class="row mb-2">
+                            <div class="col"><strong>Name: </strong></div>
+                            <div class="col"><%= student.studentName %></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col"><strong>Discipline: </strong></div>
+                            <div class="col"><%= student.discipline %></div>
+
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col"><strong>Rank: </strong></div>
+                            <div class="col"><%= student.studentRank %></div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-50">
                     <% if(student.image){ %>
                         <img src="<%= student.image %>" role="button" class='img-thumbnail rounded w-50' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } else { %>
                         <img src="/imgs/profile.png" role="button" class='img-thumbnail rounded w-50' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } %>    
-                    </div>
+                </div>
                 
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Upload Student Photo</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/student/addPhoto/<%= student._id %>?_method=PUT" enctype="multipart/form-data" method="POST">
-                                <label for="imageUpload" class="form-label d-block">Image</label>
-                                <input type="file" class="form-control mb-3" id="imageUpload" name="file"/>
-                                <button type="submit" class="btn btn-danger btn-sm" value="Upload">Upload Photo</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Upload Student Photo</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/student/addPhoto/<%= student._id %>?_method=PUT" enctype="multipart/form-data" method="POST">
+                                    <label for="imageUpload" class="form-label d-block">Image</label>
+                                    <input type="file" class="form-control mb-3" id="imageUpload" name="file"/>
+                                    <button type="submit" class="btn btn-danger btn-sm" value="Upload">Upload Photo</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                       </div>
                     </div>
-                  </div>
-
-                <div class="col-6">
-                    <ul class="list-unstyled">
-                        <li><strong>Name: </strong><%= student.studentName %></li>
-                        <li><strong>Discipline: </strong><%= student.discipline %></li>
-                        <li><strong>Rank: </strong><%= student.studentRank %></li>
-                    </ul>
                 </div>
+
+                
             </div>
 
             <div class="mt-5">
