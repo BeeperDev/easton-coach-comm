@@ -22,9 +22,9 @@
                         </div>
                         <div class="modal-body">
                             <form action="/student/addPhoto/<%= student._id %>?_method=PUT" enctype="multipart/form-data" method="POST">
-                                <label for="imageUpload" class="form-label">Image</label>
-                                <input type="file" class="form-control" id="imageUpload" name="file"/>
-                                <button type="submit" class="btn btn-primary" value="Upload">Upload Photo</button>
+                                <label for="imageUpload" class="form-label d-block">Image</label>
+                                <input type="file" class="form-control mb-3" id="imageUpload" name="file"/>
+                                <button type="submit" class="btn btn-danger btn-sm" value="Upload">Upload Photo</button>
                             </form>
                         </div>
                         <div class="modal-footer">
