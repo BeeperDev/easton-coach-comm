@@ -55,7 +55,7 @@ module.exports = {
         createdById: req.user.id, // req.user is passed in through passport when user in logged in
       });
       console.log("Comment has been added!");
-      res.redirect("/student/" + req.params.id); // redirect back to the specific post
+      res.redirect("/student/" + req.params.id); // redirect back to the specific student
     } catch (err) {
       console.log(err);
     }
@@ -75,6 +75,20 @@ module.exports = {
       );
       console.log("image added to student model");
       res.redirect(`/student/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  likeComment: async (req, res) => {
+    try {
+      await StudentComment.findOneAndUpdate(
+        { _id: req.params.commentId }, // find the comment with the ID in the url
+        {
+          $inc: { likes: 1 }, // increment the likes: by one, $inc comes with mongoose
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/student/${req.params.studentId}`);
     } catch (err) {
       console.log(err);
     }
