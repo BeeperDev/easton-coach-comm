@@ -58,4 +58,30 @@ module.exports = {
       console.log(err);
     }
   },
+  likeComment: async (req, res) => {
+    try {
+      await CoachComment.findOneAndUpdate(
+        { _id: req.params.commentId }, // find the comment with the ID in the url
+        {
+          $inc: { likes: 1 }, // increment the likes: by one, $inc comes with mongoose
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/coach/${req.params.coachId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await CoachComment.findById({ _id: req.params.coachId }); //make sure post exists
+      // Delete post from db
+      await CoachComment.deleteOne({ _id: req.params.commentId }); // delete from db
+      console.log("Deleted Post");
+      res.redirect(`/coach/${req.params.coachId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

@@ -3,7 +3,7 @@
     <div class="row mt-5">
         <div>
 
-            <!-- flexbox -->
+            <!-- flexbox Student card-->
             <div class="d-flex justify-content-between align-items-center w-100 shadow p-1 px-md-4 py-3 mb-5 rounded-3" style="background-color: #e9ecefc1">
 
                 <!-- flex child -->
@@ -12,11 +12,11 @@
                         <div class="col"><h1><%= student.studentName %></h1></div>
                     </div>
                     <div class="row mb-2 px-1 px-sm-3">
-                        <div class="col d-none d-md-block"><h6>Discipline: </h6></div>
+                        <div class="col align-self-end d-none d-md-block"><h6>Discipline: </h6></div>
                         <div class="col"><h5><%= student.discipline %></h5></div>
                     </div>
                     <div class="row mb-2 px-1 px-sm-3">
-                        <div class="col d-none d-md-block"><h6>Rank: </h6></div>
+                        <div class="col align-self-end d-none d-md-block"><h6>Rank: </h6></div>
                         <div class="col"><h5><%= student.studentRank %></h5></div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             </div>
 
                 
-<!-- comments -->
+            <!-- comment form -->
             <div class="mt-5">
               <h2>Leave a comment</h2>
               <form action="/student/addComment/<%= student._id %> " class='mb-4' method="POST">
@@ -67,7 +67,7 @@
               </form>
             </div>
             
-        
+            <!--comments-->
             <div class="list-group">
                 <% for(let i=0; i<comments.length; i++) { %>
                 <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
@@ -88,7 +88,7 @@
                         <div>
                             <!--delete button-->
                             <%if(comments[i].createdBy == activeUser.coachName){ %>
-                            <form action="/student/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+                            <form action="/student/deleteComment/<%= student._id %>/<%= comments[i]._id %>?_method=DELETE" method="POST">
                                 <button class="btn btn-sm btn-danger fa fa-trash" type="submit"></button>
                             </form>
                         <% } %>

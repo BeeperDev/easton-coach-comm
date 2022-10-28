@@ -93,4 +93,16 @@ module.exports = {
       console.log(err);
     }
   },
+  deleteComment: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await StudentComment.findById({ _id: req.params.studentId }); //make sure post exists
+      // Delete post from db
+      await StudentComment.deleteOne({ _id: req.params.commentId }); // delete from db
+      console.log("Deleted Post");
+      res.redirect(`/student/${req.params.studentId}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

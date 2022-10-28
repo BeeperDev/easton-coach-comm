@@ -8,7 +8,7 @@
                 <p><strong>Email</strong>: <%= user.email %></p>
                 <a href="/logout" class="col-3 btn btn-primary">Logout</a>
             </div>
-            
+            <!--comment form-->
             <div class="mt-5">
               <h2>Leave a comment</h2>
               <form action="/coach/addComment/<%= user._id %>" class='mb-4' method="POST">
@@ -18,19 +18,43 @@
                 <button type="submit" class="btn btn-danger">Submit</button>
               </form>
             </div>
-            
+            <!--comments-->
             <div class="list-group">
                 <% for(let i=0; i<comments.length; i++) { %>
                 <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
+                  <!--flexbox-->
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1"><%= comments[i].createdBy %>:</h5>
                     <small> <%= (comments[i].createdAt).toDateString(); %> </small>
                   </div>
                   <p class="mb-1">"<%= comments[i].comment%>"</p>
-                  <small>And some small print.</small>
+                  <!--under comment buttons-->
+                  <div class="d-flex w-100 justify-content-between">
+                    <div class="d-flex">
+                        <!--like button-->
+                        <form action="/coach/likeComment/<%= user._id %>/<%= comments[i]._id %>?_method=PUT" method="POST">
+                            <button class="btn btn-sm btn-outline-dark fa fa-heart" style="color: red;" type="submit"></button>
+                        </form>
+                        <small class="ps-1 pt-1"><%= comments[i].likes %></small>
+                    </div>
+                    <div>
+                        <!--delete button-->
+                        <%if(comments[i].createdBy == activeUser.coachName){ %>
+                        <form action="/coach/deleteComment/<%= user._id %>/<%= comments[i]._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm btn-danger fa fa-trash" type="submit"></button>
+                        </form>
+                        <% } %>
+                    </div>
+                  </div>
+
+
+
                 </a>
                 <% } %>
             </div>
+
+
+
 
         </div>
     </div>

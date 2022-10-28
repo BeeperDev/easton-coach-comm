@@ -39,7 +39,7 @@
      
 
 
-
+      <!--comment form-->
       <div class="mt-5">
         <h2>Leave a comment</h2>
         <form action="/general/addComment" class='mb-4' method="POST">
@@ -49,6 +49,7 @@
           <button type="submit" class="btn btn-danger">Submit</button>
         </form>
       </div>
+      <!--posts-->
       <div class="list-group">
         <% for(let i=0; i<posts.length; i++) { %>
           <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
@@ -57,7 +58,28 @@
               <small> <%= (posts[i].createdAt).toDateString(); %> </small>
             </div>
             <p class="mb-1">"<%= posts[i].comment%>"</p>
-            <small>And some small print.</small>
+            <!--under comment buttons-->
+            <div class="d-flex w-100 justify-content-between">
+              <div class="d-flex">
+                  <!--like button-->
+                  <form action="/general/likeComment/<%= posts[i]._id %>?_method=PUT" method="POST">
+                      <button class="btn btn-sm btn-outline-dark fa fa-heart" style="color: red;" type="submit"></button>
+                  </form>
+                  <small class="ps-1 pt-1"><%= posts[i].likes %></small>
+              </div>
+              <div>
+                  <!--delete button-->
+                  <%if(posts[i].createdBy == activeUser.coachName){ %>
+                  <form action="/general/deleteComment/<%= posts[i]._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-sm btn-danger fa fa-trash" type="submit"></button>
+                  </form>
+                  <% } %>
+              </div>
+            </div>
+
+
+
+
           </a>
         <% } %>
       </div>

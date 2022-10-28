@@ -1,6 +1,5 @@
 const cloudinary = require("../middleware/cloudinary");
 const GeneralPost = require("../models/GeneralPost");
-const CoachComment = require("../models/CoachComment");
 const Coach = require("../models/Coach");
 
 module.exports = {
@@ -27,6 +26,32 @@ module.exports = {
       });
       console.log("Comment has been added!");
       res.redirect("/general"); // redirect back to the specific post
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  likePost: async (req, res) => {
+    try {
+      await GeneralPost.findOneAndUpdate(
+        { _id: req.params.id }, // find the comment with the ID in the url
+        {
+          $inc: { likes: 1 }, // increment the likes: by one, $inc comes with mongoose
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/general`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deletePost: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await GeneralPost.findById({ _id: req.params.id }); //make sure post exists
+      // Delete post from db
+      await GeneralPost.deleteOne({ _id: req.params.id }); // delete from db
+      console.log("Deleted Post");
+      res.redirect("/general");
     } catch (err) {
       console.log(err);
     }
