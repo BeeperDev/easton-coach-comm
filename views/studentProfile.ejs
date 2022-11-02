@@ -4,19 +4,19 @@
         <div>
 
             <!-- flexbox -->
-            <div class="d-flex justify-content-between align-items-center w-100 shadow px-4 py-3 mb-5 rounded-3" style="background-color: #e9ecefc1">
+            <div class="d-flex justify-content-between align-items-center w-100 shadow p-1 px-md-4 py-3 mb-5 rounded-3" style="background-color: #e9ecefc1">
 
                 <!-- flex child -->
-                <div class="w-50">
-                    <div class="row mb-5">
+                <div>
+                    <div class="row mb-5 p-1 my-1 p-sm-3 my-sm-3 mx-md-3">
                         <div class="col"><h1><%= student.studentName %></h1></div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col"><h6>Discipline: </h6></div>
+                    <div class="row mb-2 px-1 px-sm-3">
+                        <div class="col d-none d-md-block"><h6>Discipline: </h6></div>
                         <div class="col"><h5><%= student.discipline %></h5></div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col"><h6>Rank: </h6></div>
+                    <div class="row mb-2 px-1 px-sm-3">
+                        <div class="col d-none d-md-block"><h6>Rank: </h6></div>
                         <div class="col"><h5><%= student.studentRank %></h5></div>
                     </div>
                 </div>
@@ -24,9 +24,9 @@
                 <!-- flex child -->
                 <div>
                     <% if(student.image){ %>
-                        <img src="<%= student.image %>" role="button" class='img-thumbnail rounded' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
+                        <img src="<%= student.image %>" role="button" class='img-thumbnail rounded'  data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } else { %>
-                        <img src="/imgs/profile.png" role="button" class='img-thumbnail rounded' data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
+                        <img src="/imgs/profile.png" role="button" class='img-thumbnail rounded' style="max-width: 235px;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } %>    
                 </div>
 
@@ -71,12 +71,27 @@
             <div class="list-group">
                 <% for(let i=0; i<comments.length; i++) { %>
                 <a href="#" class="list-group-item list-group-item-action mb-4" style='border: 1px solid grey' aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><%= comments[i].createdBy %>:</h5>
-                    <small> <%= (comments[i].createdAt).toDateString(); %> </small>
-                  </div>
-                  <p class="mb-1">"<%= comments[i].comment%>"</p>
-                  <small>And some small print.</small>
+                    <!--flexbox-->
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><%= comments[i].createdBy %>:</h5>
+                        <small> <%= (comments[i].createdAt).toDateString(); %> </small>
+                    </div>
+                    <p class="mb-1">"<%= comments[i].comment%>"</p>
+                    <div class="d-flex w-100 justify-content-between">
+                        <div class="d-flex">
+                            <form action="/student/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+                                <button class="btn btn-sm btn-outline-dark fa fa-heart" style="color: red;" type="submit"></button>
+                            </form>
+                            <small class="ps-1 pt-1"><%= comments[i].likes %></small>
+                        </div>
+                        <div>
+                            <%if(comments[i].createdBy == activeUser.coachName){ %>
+                            <form action="/student/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger fa fa-trash" type="submit"></button>
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
                 </a>
                 <% } %>
             </div>
