@@ -5,9 +5,7 @@ const StudentComment = require("../models/StudentComment");
 module.exports = {
   getStudents: async (req, res) => {
     try {
-      const students = await Student.find()
-        .sort({ studentName: "desc" })
-        .lean();
+      const students = await Student.find().sort({ studentName: 1 }).lean();
       res.render("student.ejs", {
         activeUser: req.user,
         students: students,

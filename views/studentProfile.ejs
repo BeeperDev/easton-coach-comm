@@ -19,12 +19,37 @@
                         <div class="col align-self-end d-none d-md-block"><h6>Rank: </h6></div>
                         <div class="col"><h5><%= student.studentRank %></h5></div>
                     </div>
+                    <div class="row mb-2 px-1 px-sm-3">
+                        <div class="col align-self-end d-none d-md-block"><h6>Promote? </h6></div>
+                        <div class="col d-flex">
+                            <form action="/student/thumbsUp/<%= student._id %>?_method=PUT" method="POST">
+                                <button class="fa fa-thumbs-up btn btn-sm btn-outline-dark" type="submit"></button>
+                            </form>
+                            <form action="/student/thumbsUp/<%= student._id %>?_method=PUT" method="POST">
+                                <button class="fa fa-thumbs-up btn btn-sm btn-outline-dark" type="submit"></button>
+                            </form>
+                            <form action="/student/thumbsUp/<%= student._id %>?_method=PUT" method="POST">
+                                <button class="fa fa-thumbs-up btn btn-sm btn-outline-dark" type="submit"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <% if(student.promote === false) { %>
+                    <div class="row mb-2 px-1 px-sm-3">
+                        <div class="col align-self-end d-none d-md-block"><h6> </h6></div>
+                        <div class="col">
+                            <!--promote button-->
+                            <form action="/student/promote/<%= student._id %>?_method=PUT" method="POST">
+                            <button class="btn btn-sm btn-outline-dark" style="color: green;" type="submit">Promote!</button>
+                        </form>
+                        </div>
+                    </div>   
+                    <% } %>
                 </div>
 
                 <!-- flex child -->
                 <div>
                     <% if(student.image){ %>
-                        <img src="<%= student.image %>" role="button" class='img-thumbnail rounded'  data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
+                        <img src="<%= student.image %>" role="button" class='img-thumbnail rounded'  style="max-width: 235px;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } else { %>
                         <img src="/imgs/profile.png" role="button" class='img-thumbnail rounded' style="max-width: 235px;" data-bs-toggle="modal" data-bs-target="#exampleModal" alt="stock profile">
                     <% } %>    
