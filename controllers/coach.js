@@ -16,6 +16,17 @@ module.exports = {
       console.log(err);
     }
   },
+  getCoaches: async (req, res) => {
+    try {
+      const coaches = await Coach.find().sort({ coachName: "desc" }).lean();
+      res.render("coach.ejs", {
+        coaches: coaches,
+        user: req.user,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   addComment: async (req, res) => {
     try {
       await CoachComment.create({
@@ -26,8 +37,6 @@ module.exports = {
         createdById: req.user.id, // req.user is passed in through passport when user in logged in
       });
       console.log("Comment has been added!");
-      console.log(req.params.id);
-      console.log(req.user.coachName);
       res.redirect("/coach/" + req.params.id); // redirect back to the specific post
     } catch (err) {
       console.log(err);

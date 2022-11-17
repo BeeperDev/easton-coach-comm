@@ -1,0 +1,19 @@
+<%- include('partials/headerInside') -%>
+<main class="container">
+  <div class="row justify-content-between">
+    <section class="col-6 mt-5">
+      <h2 class="pb-4">Current Coaches</h2>
+      <ul class="list-unstyled">
+        <% for(let i=0; i< coaches.length; i++) { %>
+        <li>
+          <a href="/coach/<%= coaches[i]._id %>">
+            <span> <%= coaches[i].coachName %></span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<%- include('partials/footer') -%>
