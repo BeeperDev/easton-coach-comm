@@ -10,7 +10,7 @@ const CoachCommentSchema = new mongoose.Schema({
     required: true,
   },
   // this comment is for which coach**
-  coach: {
+  coachPage: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Coach",
   },

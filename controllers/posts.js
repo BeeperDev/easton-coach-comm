@@ -1,20 +1,15 @@
 const cloudinary = require("../middleware/cloudinary");
 const GeneralPost = require("../models/GeneralPost");
 const CoachComment = require("../models/CoachComment");
+const Coach = require("../models/Coach");
 
 module.exports = {
-  getProfile: async (req, res) => {
-    try {
-      const posts = await CoachComment.find({ user: req.user.id });
-      res.render("coachProfile.ejs", { CoachComments: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
   getFeed: async (req, res) => {
     try {
       const posts = await GeneralPost.find().sort({ createdAt: "desc" }).lean();
-      res.render("generalPosts.ejs", { generalPost: posts });
+      const coaches = await Coach.find({ user: req.user.id });
+
+      res.render("generalPosts.ejs", { generalPost: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
