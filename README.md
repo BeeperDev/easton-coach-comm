@@ -18,19 +18,18 @@ This is a fullstack web app that helps martial arts coaches at Easton Training C
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, Bootstrap, Node, Express, MongoDB
+**Tech used:** HTML, CSS, JavaScript, Bootstrap, EJS, Node, Express, MongoDB
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write *something*. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+This fullstack app utilizes MVC structure for organization. The views were built with EJS to display the data saved in a MongoDB database. Users (coaches) login sessions are stored using express-sesson and passport was used for login authentication. Cloudinary was used to store the location of profile images that can be uploaded to coach and student profiles. MongoDB was used to store user data, their login sessions, student profile data, and comments for the general bulletin, as well as coach and student profiles. This app is fully responsive and works well on mobile devices the coaches will be using while they teach class at the gym.
+  
 
 ## Optimizations
-*(optional)*
 
-You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+Other than some more styling to be done, there are just a few features left to be built with this app. The coaches using this app still need to be able to vote if a student is ready to be promoted. There is a promotion button that will appear when enough votes are cast. After the student is promoted in class, the promoting coach can use that button to change the student’s rank in the database. 
 
 ## Lessons Learned:
 
-No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those *whoa this is awesome* or *fuck yeah I did it!* moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
-
+Building this app has shown me the importance of file organization and how helpful MVC structure is for fullstack apps. I have moments of joy when I use a new Mongoose method or successfully implement my logic in the templating language I’m using.
 
 ---
 
